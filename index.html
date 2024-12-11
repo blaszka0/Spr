@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Sandra Błaszkowska</title>
+    <style>
+        #wyniki {
+            font-size: 2cm;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Funkcja Kwadratowa</h1>
+    <label>a: <input type="number" id="a"></label>
+    <label>b: <input type="number" id="b"></label>
+    <label>c: <input type="number" id="c"></label>
+    <button onclick="wyniki()">Oblicz</button>
+    <div id="wyniki"></div>
+
+    <script>
+        function wyniki() {
+            var a = parseFloat(document.getElementById("a").value);
+            var b = parseFloat(document.getElementById("b").value);
+            var c = parseFloat(document.getElementById("c").value);
+            var wyniki = document.getElementById("wyniki");
+            wyniki.innerHTML = "";
+
+            if (a == 0) {
+                wyniki.innerHTML = "To nie jest funkcja kwadratowa.";
+                return;
+            }
+
+            var p = -b / (2 * a);
+            var q = a * p * p + b * p + c;
+            wyniki.innerHTML += `Wierzchołek: (${p.toFixed(2)}, ${q.toFixed(2)})<br>`;
+
+            wyniki.innerHTML += `Postać kanoniczna: y = ${a}(x - ${p.toFixed(2)})^2 + ${q.toFixed(2)}<br>`;
+
+            var delta = b * b - 4 * a * c;
+            if (delta > 0) {
+                var x1 = (-b - delta ** 0.5) / (2 * a);
+                var x2 = (-b + delta ** 0.5) / (2 * a);
+                wyniki.innerHTML += `Miejsca zerowe: x1 = ${x1.toFixed(2)}, x2 = ${x2.toFixed(2)}<br>`;
+                wyniki.innerHTML += `Postać iloczynowa: y = ${a}(x - ${x1.toFixed(2)})(x - ${x2.toFixed(2)})<br>`;
+            } 
+            else if (delta == 0) {
+                var x0 = -b / (2 * a);
+                wyniki.innerHTML += `Miejsce zerowe: = ${x0.toFixed(2)}<br>`;
+                wyniki.innerHTML += `Postać iloczynowa: y = ${a}(x - ${x0.toFixed(2)})²<br>`;
+            } 
+            else {
+                wyniki.innerHTML += "Brak miejsc zerowych.<br>";
+            }
+
+            wyniki.innerHTML += `Funkcja rośnie dla x > ${p.toFixed(2)}<br>`;
+            wyniki.innerHTML += `Funkcja maleje dla x < ${p.toFixed(2)}<br>`;
+        }
+    </script>
+</body>
+</html>
