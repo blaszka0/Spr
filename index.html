@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Sandra Błaszkowska</title>
+    <title>Oblicz Funkcję Kwadratową</title>
     <style>
         #wyniki {
             font-size: 2cm;
@@ -12,49 +12,48 @@
 </head>
 <body>
     <h1>Funkcja Kwadratowa</h1>
-    <label>a: <input type="number" id="a_bla"></label>
-    <label>b: <input type="number" id="b_bla"></label>
-    <label>c: <input type="number" id="c_bla"></label>
+    <label>a: <input type="number" id="a"></label>
+    <label>b: <input type="number" id="b"></label>
+    <label>c: <input type="number" id="c"></label>
     <button onclick="wyniki()">Oblicz</button>
     <div id="wyniki"></div>
 
     <script>
         function wyniki() {
-            var a_bla = parseFloat(document.getElementById("a_bla").value);
-            var b_bla = parseFloat(document.getElementById("b_bla").value);
-            var c_bla = parseFloat(document.getElementById("c_bla").value);
+            var a_bla = parseFloat(document.getElementById("a").value);
+            var b_bla = parseFloat(document.getElementById("b").value);
+            var c_bla = parseFloat(document.getElementById("c").value);
             var wyniki = document.getElementById("wyniki");
             wyniki.innerHTML = "";
 
+
             if (a_bla == 0) {
-                wyniki.innerHTML = "To nie jest funkcja kwadratowa.";
+                alert("To nie jest funkcja kwadratowa.");
                 return;
             }
 
             var p_bla = -b_bla / (2 * a_bla);
             var q_bla = a_bla * p_bla * p_bla + b_bla * p_bla + c_bla;
-            wyniki.innerHTML += `Wierzchołek: (${p.toFixed(2)}, ${q.toFixed(2)})<br>`;
+            wyniki.innerHTML += `Wierzchołek: (${p_bla.toFixed(2)}, ${q_bla.toFixed(2)})<br>`;
 
-            wyniki.innerHTML += `Postać kanoniczna: y = ${a}(x - ${p.toFixed(2)})^2 + ${q.toFixed(2)}<br>`;
+            wyniki.innerHTML += `Postać kanoniczna: y = ${a_bla}(x - ${p_bla.toFixed(2)})² + ${q_bla.toFixed(2)}<br>`;
 
-            var delta_bla = b_bla * b_bla - 4 * a_bla * c_bla;
-            if (delta_bla > 0) {
-                var x1 = (-b_bla - delta_bla ** 0.5) / (2 * a_bla);
-                var x2 = (-b_bla + delta_bla ** 0.5) / (2 * a_bla);
-                wyniki.innerHTML += `Miejsca zerowe: x1 = ${x1.toFixed(2)}, x2 = ${x2.toFixed(2)}<br>`;
-                wyniki.innerHTML += `Postać iloczynowa: y = ${a}(x - ${x1.toFixed(2)})(x - ${x2.toFixed(2)})<br>`;
-            } 
-            else if (delta_bla == 0) {
-                var x0 = -b_bla / (2 * a_bla);
-                wyniki.innerHTML += `Miejsce zerowe: = ${x0.toFixed(2)}<br>`;
-                wyniki.innerHTML += `Postać iloczynowa: y = ${a}(x - ${x0.toFixed(2)})²<br>`;
-            } 
-            else {
+            var delta = b_bla * b_bla - 4 * a_bla * c_bla;
+            if (delta > 0) {
+                var x1_bla = (-b_bla - Math.sqrt(delta)) / (2 * a_bla);
+                var x2_bla = (-b_bla + Math.sqrt(delta)) / (2 * a_bla);
+                wyniki.innerHTML += `Miejsca zerowe: x1 = ${x1_bla.toFixed(2)}, x2 = ${x2_bla.toFixed(2)}<br>`;
+                wyniki.innerHTML += `Postać iloczynowa: y = ${a_bla}(x - ${x1_bla.toFixed(2)})(x - ${x2_bla.toFixed(2)})<br>`;
+            } else if (delta == 0) {
+                var x0_bla = -b_bla / (2 * a_bla);
+                wyniki.innerHTML += `Miejsce zerowe: x0 = ${x0_bla.toFixed(2)}<br>`;
+                wyniki.innerHTML += `Postać iloczynowa: y = ${a_bla}(x - ${x0_bla.toFixed(2)})²<br>`;
+            } else {
                 wyniki.innerHTML += "Brak miejsc zerowych.<br>";
             }
 
-            wyniki.innerHTML += `Funkcja rośnie dla x > ${p.toFixed(2)}<br>`;
-            wyniki.innerHTML += `Funkcja maleje dla x < ${p.toFixed(2)}<br>`;
+            wyniki.innerHTML += `Funkcja rośnie dla x > ${p_bla.toFixed(2)}<br>`;
+            wyniki.innerHTML += `Funkcja maleje dla x < ${p_bla.toFixed(2)}<br>`;
         }
     </script>
 </body>
